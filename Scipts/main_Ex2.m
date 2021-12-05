@@ -13,10 +13,8 @@ clear all;
 close all;
 
 
-
 %% Task 1
 
-% input of rot3d:
 % R_i = rot3d(angle,axis)
 % Two imput arguments are required to for the function rot3d
 % For more information use 'doc rot3d'
@@ -207,12 +205,12 @@ Randiant_to_Degree_value = 360/(2*pi);
 
 deg = Randiant_to_Degree_value*Ra_ERA;
 
-De_Mi_Se_ = DecDeg_To_De_Mi_Se(deg);
+De_Mi_Se_ERA = DecDeg_To_De_Mi_Se(deg);
 
-De_Mi_Se_(3) = round(De_Mi_Se_(3));
+De_Mi_Se_ERA(3) = round(De_Mi_Se_(3));
 
 %Earth roation angle:
-De_Mi_Se_
+De_Mi_Se_ERA
 
 
 %Greenwich Apparent Sidereal Time
@@ -233,8 +231,54 @@ DecDeg_To_De_Mi_Se(GAST)
 
 %% Task6
 
+VLBI_Group_Delay_TT = 0.02; %sconds in TT
+
+VLBI_Group_Delay_TCG = TTdiv_To_TCGdiv(VLBI_Group_Delay_TT);
+
+VLBI_Group_Delay_TCB = TCGdiv_To_TCBdiv(VLBI_Group_Delay_TCG);
+
+% Difference in meter
+
+c = 299792458; %m/s
+
+VLBI_Group_Delay_In_Meter = ((c * VLBI_Group_Delay_TCB) / c) - ...
+    ((c * VLBI_Group_Delay_TT) / c);
+
+disp(append("The difference is: ", ...
+    num2str(VLBI_Group_Delay_In_Meter * 10^6), " micro meter"))
 
 
+
+
+
+
+
+
+%qq
+
+gravitantional_potential = 887384185629.236;
+Special_relativistic_term = 450000000;
+
+
+%{
+
+%((SB_GM(1) / SB_MD(1)) / V_ext) * 100;
+
+((SB_GM(4) / SB_MD(4)) / V_ext) * 100
+
+end
+
+
+gravitantional potential = 887384185629.236
+barycentric velocity = 30000
+
+887384185629.236 =?= 2 * (30000^2/2)
+
+
+
+887384185629.236 =?= 900000000
+
+%}
 
 
 
